@@ -88,7 +88,30 @@ export default function DashboardPage() {
     socketRef.current.emit("join_room", { code, username: name });
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Bazar Game",
+    url: "https://bazargame.vercel.app",
+    description:
+      "Real-time 4-player multiplayer card game. No login, no install. Match cards, steal wallets, and beat your opponents.",
+    applicationCategory: "GameApplication",
+    genre: "Card Game",
+    browserRequirements: "Requires JavaScript. Works in any modern browser.",
+    operatingSystem: "Any",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+  };
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     <main className="flex flex-col items-center justify-center min-h-screen gap-8 p-6">
       <h1 className="text-5xl font-black tracking-tight text-yellow-400">Card Arena</h1>
       <p className="text-gray-400 text-sm">No login. No install. Just play.</p>
@@ -157,5 +180,6 @@ export default function DashboardPage() {
         </div>
       </div>
     </main>
+    </>
   );
 }
